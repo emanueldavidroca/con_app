@@ -18,21 +18,8 @@ let usersController = {
         });
         res.redirect("/usuarios/login");
     },
-
     mi_cuenta:(req,res)=>{
         res.render("./mi_cuenta");
-    },
-    changePassword:(req,res)=>{
-        req.session.destroy((err)=>{
-            console.log("destroy");
-        });
-        res.redirect("/users/login");
-    },
-    newPassword:(req,res)=>{
-        req.session.destroy((err)=>{
-            console.log("destroy");
-        });
-        res.redirect("/users/login");
     },
     logear:async (req,res)=>{
         try{
@@ -60,108 +47,5 @@ let usersController = {
         }
 
     },
-    create:async (req,res)=>{
-        try{
-            let roles = await rols.findAll();
-            if(roles){
-                res.render("./create_users",{roles});
-            }
-        }
-        catch(e){
-            console.log(e)
-            //res.render("/users/create")
-        } 
-    },
-    store:async(req,res)=>{
-        try{
-            const {username,fullName,password,email,birthDate,roles} = req.body;
-            let nuevoUsuario = await users.create({
-                username,
-                fullName,
-                password,
-                email,
-                birthDate,
-            });
-            if(nuevoUsuario){
-                roles.forEach((r)=>{
-                    rolusers.create({userId:nuevoUsuario.dataValues.id,rolId:r})
-                    .then((result)=>{
-                        console.log(result);
-                    })
-                });
-            }
-            res.redirect("/users/list");
-        }
-        catch(e){
-            console.log(e)
-        }
-        
-    },
-    edit: async(req,res)=>{
-        try{
-            let usuario = await users.findOne({where:{id:req.params.id},include:{model:rols}});
-            let roles = await rols.findAll();
-            let roles_usuario = usuario.rols.map((r) => {return r.dataValues.id});
-            if(usuario && roles){
-                res.render("./create_users",{usuario,roles,roles_usuario});
-            }
-        }
-        catch(e){
-            console.log(e)
-        } 
-    },
-    update: async(req,res)=>{
-        try{
-            let {id} = req.params;
-            const {username,fullName,password,email,birthDate,roles} = req.body;
-
-            let result = await users.update({
-                username,
-                fullName,
-                password,
-                email,
-                birthDate,
-            },{where:{id}});
-            if(result){
-                rolusers.destroy({where:{userId:id}});
-                if(Array.isArray(roles)){
-                    roles.forEach((r)=>{
-                        rolusers.create({userId:id,rolId:r})
-                        .then((result)=>{
-                            
-                        })
-                    });
-                }else{
-                    rolusers.create({userId:id,rolId:roles})
-                    .then((result)=>{
-                        
-                    })
-                }
-                res.redirect("/users/list");  
-            }
-            else{
-                res.redirect("/users/edit/"+id);
-
-            }
-        }
-        catch(e){
-            console.log(e)
-        }
-    },
-    remove: async(req,res)=>{
-        try {
-            if(req.params.id){
-                let remove = users.destroy({where:{id:req.params.id}});
-                if(remove){
-                    res.redirect("/users/list");
-                }
-                else{
-                    res.redirect("/users/list");
-                }
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
 }
 module.exports = usersController;
