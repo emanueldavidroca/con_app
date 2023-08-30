@@ -17,7 +17,7 @@ const userRolValidation = (type) =>{
         }
         else{
             req.flash('error_messages', {title:"rol invalido",description:"Usuario actual no tiene permiso necesario :"+type});
-            res.redirect("/users/login/")
+            res.redirect("/usuarios/login/")
         }   
     }
 }

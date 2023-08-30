@@ -7,17 +7,17 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "eztrack",
-    "host": "127.0.0.1",
+    "username": "conrado",
+    "password": "0341rccapo",
+    "database": "conrado_admin",
+    "host": "mysql-conrado.alwaysdata.net",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "eztrack",
-    "host": "127.0.0.1",
+    "username": "conrado",
+    "password": "0341rccapo",
+    "database": "conrado_admin",
+    "host": "mysql-conrado.alwaysdata.net",
     "dialect": "mysql"
   }
 }
