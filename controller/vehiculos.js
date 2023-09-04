@@ -3,12 +3,14 @@ const {usuarios,vehiculos} = require("../database/models");
 
 let vehiculosController = {
     alquiler:async (req,res) =>{
-        res.render("./alquiler");
+        let vehiculos_lista = await vehiculos.findAll();
+
+        res.render("./alquiler",{tab:"servicios",title:"alquiler",vehiculos_lista});
     },
     create:async (req,res) =>{
         try {
             let vehiculos_list = await vehiculos.findAll();
-            res.render("./vehiculos",{vehiculos_list});
+            res.render("./vehiculos",{tab:"gestion",title:"vehiculos",vehiculos_list});
         } catch (error) {
             console.log(error)
         }

@@ -1,55 +1,4 @@
-<!DOCTYPE html>
-<html
-  lang="en"
-  class="light-style layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="/assets/template/assets/"
-  data-template="vertical-menu-template-free"
->
-<head>
-  <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-  />
-
-  <title>Account settings - Account | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
-
-  <meta name="description" content="" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="/assets/template/assets/vendor/fonts/boxicons.css" />
-
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="/assets/template/assets/vendor/css/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="/assets/template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="/assets/template/assets/css/demo.css" />
-
-  <!-- Vendors CSS -->
-  <link rel="stylesheet" href="/assets/template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-  <!-- Page CSS -->
-
-  <!-- Helpers -->
-  <script src="/assets/template/assets/vendor/js/helpers.js"></script>
-  <script src="/assets/template/assets/js/config.js"></script>
-
-  <link rel="stylesheet" href="plugins/powerful-calendar/page.css">
-  <link rel="stylesheet" href="plugins/powerful-calendar/style.css">
-  <link rel="stylesheet" href="plugins/powerful-calendar/theme.css">
-</head>
+<%- include("./partials/head") %>
 
 <body>
     <!-- Layout wrapper -->
@@ -89,15 +38,15 @@
                             <label for="exampleFormControlSelect1" class="form-label">Vehiculo</label>
                             <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                               <option selected>Seleccionar..</option>
-                              <option value="1">Tesla P3</option>
-                              <option value="2">BMW E90 325i</option>
-                              <option value="3">VW GOLF GTI</option>
+                              <% vehiculos_lista.forEach(vl => { %>
+                                <option value="<%- vl.id %>"><%- vl.marca %> <%- vl.modelo %></option>
+                              <% }) %>
                             </select>
                         </div>
                         <div class="mb-3 row">
                             <div class="col-md-3">
                                 <h5 class="mb-1">Tesla P3</h5>
-                                <img src="img/martinedit-640x427.jpg" style="border-radius: 4px;" class="w-75" alt="">
+                                <img src="/assets/img/martinedit-640x427.jpg" style="border-radius: 4px;" class="w-75" alt="">
                             </div>
                             <div class="col-md-5 pt-4">
                                 Yes – it is True! Ringfreaks are going electric! This is the future and it is freaking fast! We are adding the Tesla Model 3 Performance which is fully prepared for racing, with the whole FIA safety equipment to our petrol race cars fleet.
@@ -186,66 +135,31 @@ With a full charge of battery you can do at least 3 very fast laps, or if drivin
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-    <!--Calendar-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="plugins/powerful-calendar/calendar.min.js"></script>
-    <script src="https://unpkg.com/codeflask/build/codeflask.min.js"></script>
-    <script type="text/javascript">
-        var configuracion = `
-    function selectDate(date) {
-    $('#calendar-wrapper').updateCalendarOptions({
-      date: date
-    });
-    console.log(calendar.getSelectedDate());
-    }
-    
-    var defaultConfig = {
-    weekDayLength: 1,
-    date: '08/05/2021',
-    onClickDate: selectDate,
-    showYearDropdown: true,
-    startOnMonday: false,
-    };
-    
-    var calendar = $('#calendar-wrapper').calendar(defaultConfig);
-    console.log(calendar.getSelectedDate());
-    `;
-        eval(configuracion);
-       
-      </script>
-      <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-      <script defer>
-        fetch('https://raw.githubusercontent.com/wrick17/calendar-plugin/master/README.md')
-          .then(response => response.text())
-          .then(function(text) {
-            const docs = text.split('**DOCS**')[1];
-            document.getElementById('content').innerHTML = `
-            <div>
-              <h2>DOCS</h2>
-              ${marked.parse(docs)}
-            <div>
-            `;
-          });
-      </script>
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="/assets/template/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="/assets/template/assets/vendor/libs/popper/popper.js"></script>
-    <script src="/assets/template/assets/vendor/js/bootstrap.js"></script>
-    <script src="/assets/template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="/assets/template/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
-    <!-- Main JS -->
-    <script src="/assets/template/assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="/assets/template/assets/js/pages-account-settings-account.js"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
-</html>
+     <!--Calendar-->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="/assets/plugins/powerful-calendar/calendar.min.js"></script>
+     <script src="https://unpkg.com/codeflask/build/codeflask.min.js"></script>
+     <script type="text/javascript">
+         var configuracion = `
+     function selectDate(date) {
+     $('#calendar-wrapper').updateCalendarOptions({
+       date: date
+     });
+     console.log(calendar.getSelectedDate());
+     }
+     
+     var defaultConfig = {
+     weekDayLength: 1,
+     date: '08/05/2021',
+     onClickDate: selectDate,
+     showYearDropdown: true,
+     startOnMonday: false,
+     };
+     
+     var calendar = $('#calendar-wrapper').calendar(defaultConfig);
+     console.log(calendar.getSelectedDate());
+     `;
+         eval(configuracion);
+        
+       </script>
+<%- include("./partials/footer") %>

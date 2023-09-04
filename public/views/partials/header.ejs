@@ -2,7 +2,7 @@
     <div class="app-brand demo">
       <a href="index.html" class="app-brand-link">
         <a href="index.html" class="app-brand-link">
-        <img src="img/logo.jpg" class="w-100" alt="">
+        <img src="/assets/img/logo.jpg" class="w-100" alt="">
       </a>
       </a>
 
@@ -25,13 +25,13 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Landing</span>
       </li>
-      <li class="menu-item active open">
+      <li class="menu-item <% if(tab == "gestion"){%> active open <%}%>  ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
           <div data-i18n="Account Settings">Gestion</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item">
+          <li class="menu-item <% if(title == "vehiculos"){%> active <%}%> ">
             <a href="/vehiculos/" class="menu-link ">
               <div data-i18n="Account">Vehiculos</div>
             </a>
@@ -53,14 +53,14 @@
           </li>
         </ul>
       </li>
-      <li class="menu-item">
+      <li class="menu-item <% if(tab == "usuarios"){%> active open <%}%> ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
           <div data-i18n="Account Settings">Usuarios</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="mi_cuenta.html" class="menu-link">
+          <li class="menu-item <% if(title == "mi_cuenta"){%> active <%}%> ">
+            <a href="/usuarios/mi_cuenta" class="menu-link">
               <div data-i18n="Account">Mi cuenta</div>
             </a>
           </li>
@@ -76,14 +76,14 @@
           </li>
         </ul>
       </li>
-      <li class="menu-item">
+      <li class="menu-item <% if(tab == "servicios"){%> active open <%}%> ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
           <div data-i18n="Account Settings">Servicios</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item active">
-            <a href="alquiler.html" class="menu-link">
+          <li class="menu-item <% if(title == "alquiler"){%> active <%}%> ">
+            <a href="/vehiculos/alquiler" class="menu-link">
               <div data-i18n="Account">Alquiler de vehiculos</div>
             </a>
           </li>

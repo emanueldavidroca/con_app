@@ -19,7 +19,7 @@ let usuariosController = {
         res.redirect("/usuarios/login");
     },
     mi_cuenta:(req,res)=>{
-        res.render("./mi_cuenta");
+        res.render("./mi_cuenta",{tab:"usuarios",title:"mi_cuenta"});
     },
     logear:async (req,res)=>{
         try{
