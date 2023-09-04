@@ -19,6 +19,7 @@ let usuariosController = {
         res.redirect("/usuarios/login");
     },
     mi_cuenta:(req,res)=>{
+        console.log(req.session);
         res.render("./mi_cuenta",{tab:"usuarios",title:"mi_cuenta"});
     },
     logear:async (req,res)=>{
