@@ -1,5 +1,5 @@
 const session = require("express-session");
-const {usuarios,vehiculos,eventos,reservas} = require("../database/models");
+const {usuarios,vehiculos,eventos,reservas,opcion_alquileres} = require("../database/models");
 
 let vehiculosController = {
     lista_vehiculos:async (req,res) =>{
@@ -15,18 +15,17 @@ let vehiculosController = {
     },
     alquiler2:async (req,res) =>{
         let vehiculos_lista = await vehiculos.findAll();
+        let {id} = req.params;
 
-        res.render("./alquiler2",{tab:"servicios",title:"alquiler2",vehiculos_lista});
+        res.render("./alquiler2",{tab:"servicios",title:"alquiler2",vehiculos_lista,id});
     },
     alquiler_paso2:async (req,res) =>{
         sess = req.session;
-        console.log(sess);
         const {vehiculo,evento,fecha} = req.body;
         let result = await reservas.create({
             idUsuario:sess.idUser,idVehiculo:vehiculo,idEvento:evento,fecha:fecha
         });
-
-        res.render("./alquiler2",{tab:"servicios",title:"alquiler2"});
+        res.redirect("./alquiler2/"+result.dataValues.id);
     },
     alquiler3:async (req,res) =>{
         let vehiculos_lista = await vehiculos.findAll();
@@ -34,13 +33,16 @@ let vehiculosController = {
         res.render("./alquiler3",{tab:"servicios",title:"alquiler3",vehiculos_lista});
     },
     alquiler_paso3:async (req,res) =>{
-        let {idUser} = res.session;
-        const {vehiculo,evento,fecha} = req.body;
-        let result = await reservas.create({
-            idUsuario:idUser,idVehiculo:vehiculo,idEvento:evento,fecha:fecha
+        const {cantidadVueltas,naftaIncluida,instructorABordo,analisisTelemetria,seguroPremium,compuestoNeumaticos,idReserva} = req.body;
+        let resultado = await opcion_alquileres.create({
+            cantidadVueltas,naftaIncluida,instructorABordo,analisisTelemetria,seguroPremium,compuestoNeumaticos
         });
+        let result = await reservas.update({
+            idOpcionAlquiler:resultado.dataValues.id
+        },{where:{id:idReserva}});
 
-        res.render("./alquiler2",{tab:"servicios",title:"alquiler2",vehiculos_lista});
+        res.redirect("./alquiler3/"+idReserva);
+
     },
     create:async (req,res) =>{
         try {

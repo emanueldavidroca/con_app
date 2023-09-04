@@ -8,8 +8,8 @@ router.get('/lista_vehiculos'/*,userRolValidation("administrador")*/,vehiculosCo
 router.get('/alquiler/:id'/*,userRolValidation("administrador")*/,vehiculosController.alquiler);
 router.post('/alquiler_paso2'/*,userRolValidation("administrador")*/,vehiculosController.alquiler_paso2);
 router.post('/alquiler_paso3'/*,userRolValidation("administrador")*/,vehiculosController.alquiler_paso3);
-router.get('/alquiler2'/*,userRolValidation("administrador")*/,vehiculosController.alquiler2);
-router.get('/alquiler3'/*,userRolValidation("administrador")*/,vehiculosController.alquiler3);
+router.get('/alquiler2/:id'/*,userRolValidation("administrador")*/,vehiculosController.alquiler2);
+router.get('/alquiler3/:id'/*,userRolValidation("administrador")*/,vehiculosController.alquiler3);
 router.get('/'/*,userRolValidation("administrador")*/,vehiculosController.create);
 router.post('/'/*,userRolValidation("administrador")*/,vehiculosController.store);
 
