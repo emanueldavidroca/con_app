@@ -1,7 +1,7 @@
 const session = require("express-session");
 const {usuarios} = require("../database/models");
 
-let usersController = {
+let usuariosController = {
     list:async (req,res) =>{
         let usuarios_habilitados = await users.findAll({where:{active:1}});
         let usuarios_deshabilitados = await users.findAll({where:{active:0}});
@@ -48,4 +48,4 @@ let usersController = {
 
     },
 }
-module.exports = usersController;
+module.exports = usuariosController;

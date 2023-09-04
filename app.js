@@ -45,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /* ENRUTADO */
 let indexRouter = require('./routes/index');//ruta del controlador Index
 let usuariosRouter = require('./routes/usuarios');//ruta del controlador Usuarios
+let vehiculosRouter = require('./routes/vehiculos');//ruta del controlador Usuarios
 
 
 let listen = app.listen(port,()=>{
@@ -88,6 +89,7 @@ app.use(function(err, req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
+app.use('/vehiculos', vehiculosRouter);
 
 module.exports = app;
 
