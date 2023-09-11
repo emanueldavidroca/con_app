@@ -57,8 +57,8 @@ let alquileresController = {
     },
     alquiler4:async (req,res) =>{
         let vehiculos_lista = await vehiculos.findAll();
-    
-        res.render("./alquiler4",{sess:req.session,tab:"servicios",title:"alquiler paso 4",vehiculos_lista});
+        console.log(req.session)
+        res.render("./alquiler4",{sess:req.session,tab:"servicios",title:"alquiler paso 4"});
     },
     
 }
