@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "eztrack",
-    "host": "localhost",
+    "username": "conrado",
+    "password": "0341rccapo",
+    "database": "conrado_admin",
+    "host": "mysql-conrado.alwaysdata.net",
     "dialect": "mysql"
   },
   "test": {
