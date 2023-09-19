@@ -137,7 +137,10 @@ REPLACE INTO `reservas` (`id`, `idUsuario`, `idVehiculo`, `idEvento`, `idOpcionA
 	(17, NULL, 1, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:25:13', '2023-09-11 02:25:13', NULL),
 	(18, NULL, 1, 1, 8, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:31:14', '2023-09-11 02:33:08', NULL),
 	(19, NULL, 1, 1, 9, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:34:06', '2023-09-11 02:34:11', NULL),
-	(20, NULL, 7, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-15 02:49:49', '2023-09-15 02:49:49', NULL);
+	(20, NULL, 7, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-15 02:49:49', '2023-09-15 02:49:49', NULL),
+	(21, NULL, 39, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-19 20:57:11', '2023-09-19 20:57:11', NULL),
+	(22, NULL, 39, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-19 20:57:54', '2023-09-19 20:57:54', NULL),
+	(23, 1, 3, 2, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-19 21:05:52', '2023-09-19 21:05:52', NULL);
 
 -- Dumping structure for table eztrack.roles
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -167,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.usuarios: ~5 rows (approximately)
+-- Dumping data for table eztrack.usuarios: ~4 rows (approximately)
 REPLACE INTO `usuarios` (`id`, `nombre`, `email`, `telefono`, `identidadVerificada`, `password`, `createdAt`, `deletedAt`, `updatedAt`, `idRol`) VALUES
 	(1, 'conrado', 'conrado@gmail.com', 2147483647, NULL, '123asd', NULL, NULL, NULL, 2),
 	(2, 'prueba algo', 'prueba@gmail.com', 12345, NULL, '123asd', NULL, NULL, NULL, 1),
