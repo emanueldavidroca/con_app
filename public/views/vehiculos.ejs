@@ -21,12 +21,23 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-4">
-                <h5 class="card-header">Alta Vehiculos</h5>
+                <% if (typeof vehiculo_editar  != "undefined") { %>
+                  <h5 class="card-header">Editar Vehiculo</h5>
+                 <% } else{ %>
+                  <h5 class="card-header">Alta Vehiculo</h5>
+                <% } %>
+                
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" action="/admin/vehiculos/" enctype="multipart/form-data">
-                    <input type="hidden" name="last_id" value="<%- last_id %>">
+                  <form id="formAccountSettings" method="POST"
+                  <% if (typeof vehiculo_editar  != "undefined") { %>
+                    action="/admin/vehiculos/" 
+                  <% }else{ %>
+                    action="/admin/vehiculos/1?_method=PUT" 
+                  <% } %>
+                   
+                   enctype="multipart/form-data">
                     <div class="row">
                       <div class="mb-3 col-md-4">
                         <label for="model" class="form-label">Modelo</label>
@@ -35,13 +46,18 @@
                           type="text"
                           id="model"
                           name="model"
-                          value=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.modelo %>"
+                          <% } %>
                           autofocus
                         />
                       </div>
                       <div class="mb-3 col-md-4">
                         <label for="brand" class="form-label">Marca</label>
-                        <input class="form-control" type="text" name="brand" id="brand" value="" />
+                        <input class="form-control" type="text" name="brand" id="brand" 
+                        <% if (typeof vehiculo_editar  != "undefined") { %>
+                          value="<%- vehiculo_editar.marca %>"
+                        <% } %> />
                       </div>
                       <div class="mb-3 col-md-4">
                         <label for="year" class="form-label">Año</label>
@@ -50,7 +66,9 @@
                           class="form-control"
                           id="year"
                           name="year"
-                          value=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.año %>"
+                          <% } %>
                         />
                       </div>
                       <div class="mb-3 col-md-6">
@@ -60,7 +78,9 @@
                           type="text"
                           id="power"
                           name="power"
-                          value=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.potencia %>"
+                          <% } %>
                           placeholder=""
                         />
                       </div>
@@ -72,7 +92,9 @@
                           class="form-control"
                           id="weight"
                           name="weight"
-                          value=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.peso %>"
+                          <% } %>
                         />
                       </div>
                       <div class="mb-3 col-md-4">
@@ -82,7 +104,9 @@
                           type="number"
                           id="level"
                           name="level"
-                          value=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.nivel %>"
+                          <% } %>
                           placeholder=""
                         />
                       </div>
@@ -93,7 +117,9 @@
                           class="form-control"
                           id="lap_price"
                           name="lap_price"
-                          value=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.precio_vuelta %>"
+                          <% } %>
                         />
                       </div>
                       <div class="mb-3 col-md-4">
@@ -103,14 +129,19 @@
                           class="form-control"
                           id="traction"
                           name="traction"
-                          value=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.traccion %>"
+                          <% } %>
                         />
                       </div>
                       <div class="mb-3 col-md-8">
                         <label for="description" class="form-label">Descripcion</label>
-                        <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+                        <textarea name="description" id="description" class="form-control" rows="5"><% if (typeof vehiculo_editar  != "undefined") { %><%- vehiculo_editar.Descripcion %><% } %></textarea>
                       </div>
                       <div class="mb-3 col-md-4">
+                        <% if (typeof vehiculo_editar  != "undefined") { %>
+                          <img src="<%- vehiculo_editar.img %>" class="w-100 d-block">
+                        <% } %>
                         <label for="image" class="form-label">Imagen</label>
                         <input type="file" name="featuredImage" class="form-control" id="image">
                       </div>
@@ -156,10 +187,10 @@
                                   <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="/vehiculos/editar/<%- v.id %>"
+                                  <a class="dropdown-item" href="/admin/vehiculos/<%- v.id %>"
                                     ><i class="bx bx-edit-alt me-1"></i> Editar</a
                                   >
-                                  <a class="dropdown-item" href="/vehiculos/borrar/<%- v.id %>"
+                                  <a class="dropdown-item" href="/admin/borrar/<%- v.id %>"
                                     ><i class="bx bx-trash me-1"></i> Borrar</a
                                   >
                                 </div>
