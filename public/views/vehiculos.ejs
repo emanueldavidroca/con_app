@@ -177,10 +177,10 @@
                         <label for="description" class="form-label">Descripcion</label>
                         <textarea name="description" id="description" class="form-control validate" rows="5"
                         data-validation-type="alphanumeric_space"
-                        data-validation-length="1_200"
+                        data-validation-length="0_200"
                         ><% if (typeof vehiculo_editar  != "undefined") { %><%- vehiculo_editar.Descripcion %><% } %></textarea>
                         <div class="error-validacion">
-                          Email debe ser un correo electronico valido ej:prueba@gmail.com
+                          Maxima cantidad de caracteres para la descripcion es 200.
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">
