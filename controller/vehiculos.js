@@ -18,6 +18,8 @@ let vehiculosController = {
             let result = await vehiculos.create({
                 modelo:model,marca:brand,traccion:traction,año:year,potencia:power,peso:weight,nivel:level,descripcion:description,precio_vuelta:lap_price
             });
+            console.log("aca");
+
             if(result){
                 let update_image = await vehiculos.update({img:req.file.filename},{where:{id:result.id}});
                 res.redirect("/admin/vehiculos?result=success");
