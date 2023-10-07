@@ -11,12 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
         pagos_pendientes.belongsTo(models.usuarios,{foreignKey:"idUsuario",as:"usuario"});
+        pagos_pendientes.belongsTo(models.reservas,{foreignKey:"idReserva",as:"reserva"});
     }
   }
   pagos_pendientes.init({
     total: DataTypes.INTEGER,
     idUsuario: DataTypes.INTEGER,
     metodo: DataTypes.STRING,
+    idReserva: DataTypes.INTEGER,
+    status: DataTypes.STRING
+
   }, {
     sequelize,
     modelName: 'pagos_pendientes',
