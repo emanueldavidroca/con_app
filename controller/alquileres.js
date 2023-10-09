@@ -3,9 +3,10 @@ const { Op } = require("sequelize");
 const {usuarios,vehiculos,eventos,reservas,opcion_alquileres}  = require("../database/models");
 let alquileresController = {
     alquiler:async (req,res) =>{
+        let status = req.query.status ?? null;
         let vehiculos_lista = await vehiculos.findAll();
         
-        res.render("./alquiler",{sess:req.session,tab:"servicios",title:"alquiler paso 1",vehiculos_lista});
+        res.render("./alquiler",{sess:req.session,tab:"servicios",title:"alquiler paso 1",vehiculos_lista,status});
     },
     alquiler2:async (req,res) =>{
         let {id} = req.params;
@@ -34,17 +35,17 @@ let alquileresController = {
             }
             const {vehiculo,evento,fecha} = req.body;
             let sess = req.session ?? null;
+            console.log(new Date(fecha).toISOString());
             let result = await reservas.create({
-                idUsuario:sess.idUser,idVehiculo:vehiculo,idEvento:evento,fecha:fecha
+                idUsuario:sess.idUser,idVehiculo:vehiculo,idEvento:evento,fecha:new Date(fecha).toISOString()
             });
-
             sess.paso = 3;
             req.session.save(function(err) {
                 console.log("saved");
             })
             res.redirect("/servicios/alquiler3/"+result.dataValues.id);
         } catch (error) {
-            
+            console.log(error)
         }
         
     },
@@ -71,9 +72,9 @@ let alquileresController = {
         res.redirect("/servicios/alquiler4/"+idReserva);
     },
     alquiler4:async (req,res) =>{
-        let vehiculos_lista = await vehiculos.findAll();
-        console.log(req.session)
-        res.render("./alquiler4",{sess:req.session,tab:"servicios",title:"alquiler paso 4"});
+        let {id} = req.params;
+        let resumen = await reservas.findOne({where:{id},include:[{model:usuarios,as:"usuario"},{model:opcion_alquileres,as:"opcion"},{model:eventos,as:"evento"},{model:vehiculos,as:"vehiculo"}]});
+        res.render("./alquiler4",{sess:req.session,tab:"servicios",title:"alquiler paso 4",resumen});
     },
     
 }

@@ -12,7 +12,7 @@ function ValidateEmail(email)
 function ValidatePassword(password,min = false,max = false) 
 {
     let regex = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
-    console.log(regex)
+    
 
     if (regex.test(password)){
         return true
@@ -41,7 +41,7 @@ function ValidateAlphanumeric_space(text,min = false,max = false)
 function ValidateText(text,min = false,max = false) 
 {
     let regex = new RegExp('^([a-zA-ZÀ-ú -/,.:"\']){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
-    console.log(regex)
+    
     if (regex.test(text.trimEnd())){
         return true
     }else{
@@ -51,7 +51,7 @@ function ValidateText(text,min = false,max = false)
 function ValidateNumber(number,min = false,max = false) 
 {
     let regex = new RegExp('^([0-9]){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
-    console.log(regex)
+    
     if (regex.test(number)){
         return true
     }else{
@@ -76,7 +76,6 @@ forms.forEach(form => {
             let length = field.dataset.validationLength ?? false;
             let min_max = (length) ? length.split("_") : [0,0];
             let validacion_resultado;
-            console.log(min_max)
             if(type == "email") 
                 validacion_resultado = ValidateEmail(field.value);
             else if(type == "password") 
