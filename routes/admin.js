@@ -14,6 +14,7 @@ router.delete('/vehiculos/:id',userRolValidation("administrador"),vehiculosContr
 router.put('/vehiculos/:id',userRolValidation("administrador"),vehiculosController.update);
 router.get('/eventos',userRolValidation("administrador"),eventosController.create);
 router.post('/eventos',userRolValidation("administrador"),eventosController.store);
+router.delete('/eventos/:id',userRolValidation("administrador"),eventosController.delete);
 router.get('/reservas',userRolValidation("administrador"),reservasController.create);
 router.get('/usuarios',userRolValidation("administrador"),usuariosController.create);
 router.get('/pagos',userRolValidation("administrador"),pagosPendientesController.lista);

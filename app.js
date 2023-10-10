@@ -38,9 +38,9 @@ const storageEngine_comprobante = multer.diskStorage({
 //initializing multer
 const upload_comprobante = multer({
   storage: storageEngine_comprobante,
-  limits: { fileSize: 1000000 },
+  limits: { fileSize: 5000000 },
   fileFilter: (req, file, cb) => {
-    checkFileType_comprobante(file, cb, );
+    checkFileType_comprobante(file, cb);
   },
 });
 
@@ -163,6 +163,12 @@ app.post("/usuarios/enviar_comprobante", upload_comprobante.single("comprobante"
   if (req.file) next();
   else next();
 });
+app.get('/assets/pagos_comprobantes/:archivo', function(req, res){
+  const file = `${__dirname}/public/assets/archivo_comprobante/${req.params.archivo}`;
+  console.log(file);
+  res.download(file); // Set disposition and send it.
+});
+
 
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);

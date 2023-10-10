@@ -18,9 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     total: DataTypes.INTEGER,
     idUsuario: DataTypes.INTEGER,
     metodo: DataTypes.STRING,
+    archivo: DataTypes.STRING,
     idReserva: DataTypes.INTEGER,
-    status: DataTypes.STRING
-
+    status: DataTypes.STRING,
+    idDatosPago: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'pagos_pendientes',

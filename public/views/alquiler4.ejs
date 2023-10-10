@@ -1,12 +1,21 @@
 <%- include("./partials/head") %>
-
+<% if (status != "undefined" && status == "ningun_datos_pago") { %>
+  <script>
+    window.addEventListener('load', function () {
+        Swal.fire(
+        'ERROR datos pago!',
+        'Ningun dato de pago cargado, ir a "mis datos de pago" para cargarlos.',
+        'error'
+      )
+    })
+  </script>
+  <% } %>
 <body id="alquiler4">
     <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
       <!-- Menu -->
 <%- include("./partials/header") %>
-
       <!-- / Menu -->
 
     <!-- Layout container -->
@@ -32,7 +41,7 @@
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST">
+                  <form id="formAccountSettings" method="POST" action="/servicios/alquiler_paso4/<%- id %>">
                     <div class="row px-3">
                       <div class="mb-3 col-md-12">
                         <label class="form-label mb-3">Metodo de pago</label>
@@ -57,7 +66,9 @@
                           </div>
                         </div>
                       </div>
+                      
                       <div id="form_datos" class="row active">
+                        <h5>Ingresar datos de pago</h5>
                         <div class="mb-3 col-md-12">
                           <label for="email" class="form-label">Email</label>
                           <input
@@ -140,6 +151,99 @@
                             value=""
                             placeholder="123"
                             autofocus
+                          />
+                        </div>
+                      </div>
+                      <div id="form_mis_datos" class="row">
+                        <h5>Mis datos de pago</h5>
+                        <div class="mb-3 col-md-12">
+                          <label for="email" class="form-label">Email</label>
+                          <input
+                            class="form-control"
+                            type="email"
+                            id="email"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.email : ''%>"
+                            autofocus
+                            disabled
+                          />
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="address" class="form-label">Direccion</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="address"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.direccion : ''%>"
+                            autofocus
+                            disabled
+
+                          />
+                        </div>
+                        <hr class="my-3">
+                        <div class="mb-3 col-md-12">
+                          <label for="cardOwner" class="form-label">Titular</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="cardOwner"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.titular : ''%>"
+                            autofocus
+                            disabled
+
+                          />
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            id="cardNumber"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.numero_tarjeta : ''%>"
+                            autofocus
+                            disabled
+
+                          />
+                        </div>
+                        <div class="mb-3 pt-2 col-md-8">
+                          <label>Fecha de expiracion</label>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <input
+                                class="form-control"
+                                type="number"
+                                id="month"
+                                value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.vencimiento.split("/")[0] : ''%>"
+                                placeholder="mes"
+                                autofocus
+                                disabled
+
+                              />
+                            </div>
+                            <div class="col-md-6">
+                              <input
+                                class="form-control"
+                                type="number"
+                                id="year"
+                                value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.vencimiento.split("/")[1] : ''%>"
+                                placeholder="año"
+                                autofocus
+                                disabled
+
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-4 ">
+                          <label for="cvv" class="form-label">CVV</label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            id="cvv"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.cvv : ''%>"
+                            placeholder="123"
+                            autofocus
+                            disabled
+
                           />
                         </div>
                       </div>
@@ -291,8 +395,11 @@
       function click_mis_datos(){
         if(document.querySelector('#form_datos').classList.contains('active')){
           document.querySelector('#form_datos').classList.remove('active');
+          document.querySelector('#form_mis_datos').classList.add('active');
         }else{
           document.querySelector('#form_datos').classList.add('active');
+          document.querySelector('#form_mis_datos').classList.remove('active');
+        
         }
       }
     </script>

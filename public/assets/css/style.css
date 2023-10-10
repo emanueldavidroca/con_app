@@ -38,6 +38,18 @@ table.table-list .thumbnail {
 }
 #alquiler4 #form_datos.active {
   display: flex;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+#alquiler4 #form_mis_datos.active {
+  background-color: rgba(42, 124, 255, 0.052);
+  border-radius: 12px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  display: flex;
+}
+#alquiler4 #form_mis_datos {
+  display: none;
 }
 #alquiler4 table#evento-detalle th {
   background-color: rgb(215, 215, 215);

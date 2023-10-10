@@ -1,6 +1,6 @@
 const session = require("express-session");
 const { Op } = require("sequelize");
-const {usuarios,vehiculos,eventos,reservas,opcion_alquileres}  = require("../database/models");
+const {usuarios,vehiculos,eventos,reservas,opcion_alquileres,datos_pagos,pagos_pendientes}  = require("../database/models");
 let alquileresController = {
     alquiler:async (req,res) =>{
         let status = req.query.status ?? null;
@@ -72,10 +72,46 @@ let alquileresController = {
         res.redirect("/servicios/alquiler4/"+idReserva);
     },
     alquiler4:async (req,res) =>{
+        let status = req.query.status ?? null;
         let {id} = req.params;
         let resumen = await reservas.findOne({where:{id},include:[{model:usuarios,as:"usuario"},{model:opcion_alquileres,as:"opcion"},{model:eventos,as:"evento"},{model:vehiculos,as:"vehiculo"}]});
-        res.render("./alquiler4",{sess:req.session,tab:"servicios",title:"alquiler paso 4",resumen});
+        let usuarioActual = await usuarios.findOne({where:{id:sess.idUser},include:[{model:datos_pagos,as:"datos_pago"}]});
+        res.render("./alquiler4",{sess:req.session,tab:"servicios",title:"alquiler paso 4",resumen,mis_datos_pago:usuarioActual.datos_pago,id,status});
     },
+    alquiler_paso4:async (req,res) =>{
+        try {
+            let {id} = req.params;
+            let sess = req.session;
+            const {mis_datos,metodo,email,address,cardOwner,cardNumber,month,year,cvv} = req.body;
+            let reservaActual = await reservas.findOne({where:{id},include:[{model:usuarios,as:"usuario"},{model:opcion_alquileres,as:"opcion"},{model:eventos,as:"evento"},{model:vehiculos,as:"vehiculo"}]});
+            if(mis_datos){
+                let usuarioActual = await usuarios.findOne({where:{id:sess.idUser},include:[{model:datos_pagos,as:"datos_pago"}]});
+                
+                
+                if(usuarioActual.datos_pago == null){
+                    res.redirect("/servicios/alquiler4/"+id+"?status=ningun_datos_pago")
+                    return false;
+                }
+                let precio_vehiculo = reservaActual.vehiculo.dataValues.precio_vuelta;
+                console.log(usuarioActual.idDatosPago)
+
+                let cantidad_vueltas = reservaActual.opcion.dataValues.cantidadVueltas;
+
+                let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo:"mis datos de pago",idReserva:id,idDatosPago:usuarioActual.idDatosPago,total:(precio_vehiculo*cantidad_vueltas)});
+                res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
+    
+            }
+            else{
+                let nuevo_datos_pago = await datos_pagos.create({direccion:address,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,estado:province,vencimiento:month+"/"+year});
+                console.log(nuevo_datos_pago);
+                let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo,idReserva:id,total:(precio_vehiculo*cantidad_vueltas),idDatosPago:nuevo_datos_pago.id});
+                res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    
     
 }
 module.exports = alquileresController;

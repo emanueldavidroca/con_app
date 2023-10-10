@@ -12,6 +12,18 @@
     }
     #form_datos.active{
         display: flex;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+    #form_mis_datos.active{
+        background-color: rgba(42, 124, 255, 0.052);
+        border-radius: 12px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        display: flex;
+    }
+    #form_mis_datos{
+        display: none;
     }
     table#evento-detalle{
         th{
