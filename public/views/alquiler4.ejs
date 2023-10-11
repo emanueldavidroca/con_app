@@ -41,7 +41,7 @@
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" action="/servicios/alquiler_paso4/<%- id %>">
+                  <form id="formAccountSettings" class="form-validate" data-validation-exception="mis_datos"  data-validation-exception-type="checkbox" method="POST" action="/servicios/alquiler_paso4/<%- id %>">
                     <div class="row px-3">
                       <div class="mb-3 col-md-12">
                         <label class="form-label mb-3">Metodo de pago</label>
@@ -70,88 +70,136 @@
                       <div id="form_datos" class="row active">
                         <h5>Ingresar datos de pago</h5>
                         <div class="mb-3 col-md-12">
+                          <label for="province" class="form-label">Estado/Provincia</label>
+                          <input
+                          class="form-control validate"
+                          type="text"
+                          id="province"
+                          name="province"
+                          data-validation-type="text"
+                          data-validation-length="1_50"
+                          autofocus
+                          />
+                          <div class="error-validacion">
+                            Estado/Provincia debe ser alfanumerico con maximo de 50 caracteres, se admite simbolos (-/,.:"\)
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="dni" class="form-label">Documento de identidad</label>
+                          <input class="form-control validate" type="number" name="dni" id="dni" data-validation-type="number"
+                          data-validation-length="7_8" />
+                        <div class="error-validacion">
+                          DNI debe ser un numero entero entre 7 o 8 caracteres.
+                        </div>
+                        </div>
+                        <div class="mb-3 col-md-12">
                           <label for="email" class="form-label">Email</label>
                           <input
-                            class="form-control"
-                            type="email"
-                            id="email"
-                            name="email"
-                            value=""
-                            autofocus
+                          class="form-control validate"
+                          type="email"
+                          id="email"
+                          name="email"
+                          data-validation-type="email"
+                          data-validation-length="1_50"
+                          placeholder="ejemplo@gmail.com"
                           />
+                          <div class="error-validacion">
+                            Ingrese un email valido
+                          </div>
                         </div>
                         <div class="mb-3 col-md-12">
                           <label for="address" class="form-label">Direccion</label>
                           <input
-                            class="form-control"
-                            type="text"
-                            id="address"
-                            name="address"
-                            value=""
-                            autofocus
+                          class="form-control validate"
+                          type="text"
+                          id="address"
+                          name="address"
+                          data-validation-type="alphanumeric_space"
+                          data-validation-length="1_50"
+                          autofocus
                           />
+                          <div class="error-validacion">
+                            Direccion debe ser texto y numeros con maximo de 50 caracteres, se admite espacios.
+                          </div>
                         </div>
                         <hr class="my-3">
                         <div class="mb-3 col-md-12">
                           <label for="cardOwner" class="form-label">Titular</label>
                           <input
-                            class="form-control"
-                            type="text"
-                            id="cardOwner"
-                            name="cardOwner"
-                            value=""
-                            autofocus
+                          class="form-control validate"
+                          type="text"
+                          id="cardOwner"
+                          name="cardOwner"
+                          data-validation-type="text"
+                          data-validation-length="1_30"
+                          placeholder="ENRIQUE LOPEZ"
                           />
+                          <div class="error-validacion">
+                            Titular debe ser un texto con maximo 30 caracteres.
+                          </div>
                         </div>
                         <div class="mb-3 col-md-12">
                           <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
                           <input
-                            class="form-control"
-                            type="number"
-                            id="cardNumber"
-                            name="cardNumber"
-                            value=""
-                            autofocus
-                          />
+                          class="form-control validate"
+                          type="number"
+                          id="cardNumber"
+                          name="cardNumber"
+                          data-validation-type="number"
+                          data-validation-length="16_19"
+                          placeholder="504512345678"
+                        />
+                        <div class="error-validacion">
+                          Numero de la tarjeta solo admite entero entre 16 y 19 caracteres.
+                        </div>
                         </div>
                         <div class="mb-3 pt-2 col-md-8">
                           <label>Fecha de expiracion</label>
                           <div class="row">
                             <div class="col-md-6">
                               <input
-                                class="form-control"
-                                type="number"
-                                id="month"
-                                name="month"
-                                value=""
-                                placeholder="mes"
-                                autofocus
+                              class="form-control validate"
+                              type="number"
+                              id="expireMonth"
+                              name="expireMonth"
+                              data-validation-type="number"
+                              data-validation-length="2_2"
+                              placeholder="01"
                               />
+                              <div class="error-validacion">
+                                Ingrese un mes valido, ej:09.
+                              </div>
                             </div>
                             <div class="col-md-6">
                               <input
-                                class="form-control"
-                                type="number"
-                                id="year"
-                                name="year"
-                                value=""
-                                placeholder="año"
-                                autofocus
+                              class="form-control validate"
+                              type="number"
+                              id="expireYear"
+                              name="expireYear"
+                              data-validation-type="number"
+                              data-validation-length="2_2"
+                              placeholder="26"
                               />
+                              <div class="error-validacion">
+                                Ingrese un año valido, ej:23.
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div class="mb-3 col-md-4 ">
                           <label for="cvv" class="form-label">CVV</label>
                           <input
-                            class="form-control"
-                            type="number"
-                            id="cvv"
-                            name="cvv"
-                            value=""
-                            placeholder="123"
-                            autofocus
+                          class="form-control validate"
+                          type="password"
+                          id="cvv"
+                          name="cvv"
+                          data-validation-type="number"
+                          data-validation-length="3_4"
+                          placeholder="123"
                           />
+                          <div class="error-validacion">
+                            Ingrese un cvv valido,entero entre 3 y 4 caracteres.
+                          </div>
                         </div>
                       </div>
                       <div id="form_mis_datos" class="row">

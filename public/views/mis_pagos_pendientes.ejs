@@ -1,5 +1,15 @@
 <%- include("./partials/head") %>
-<%- include("./partials/head") %>
+<% if (status != "undefined" && status == "reservado") { %>
+  <script>
+    window.addEventListener('load', function () {
+        Swal.fire(
+        'Reserva enviada!',
+        'Envie el comprobante del pago dentro de las proxima 24 horas para terminar completar su reserva.',
+        'success'
+      )
+    })
+  </script>
+  <% } %>
 <% if (status != "undefined" && status == "success") { %>
 <script>
   window.addEventListener('load', function () {

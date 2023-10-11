@@ -62,7 +62,12 @@ let array_timeout = [];
 forms.forEach(form => {
     let no_error = false;
     form.addEventListener("submit",(e)=>{
-        
+        if(form.dataset.validationException && form.dataset.validationExceptionType == "checkbox"){
+            if(document.querySelector("#"+form.dataset.validationException).checked == true){
+                no_error = true;
+                form.submit();
+            }
+        }
         if (!no_error)e.preventDefault();
         else{
             return true;

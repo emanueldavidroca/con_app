@@ -12,7 +12,6 @@ let alquileresController = {
         let {id} = req.params;
         let vehiculo = await vehiculos.findOne({where:{id}});
         let eventos_lista = await eventos.findAll();
-        console.log(vehiculo.id);
         let sess = req.session ?? null;
         sess.idAlquiler = vehiculo.id;
         sess.paso = 2;
@@ -35,7 +34,6 @@ let alquileresController = {
             }
             const {vehiculo,evento,fecha} = req.body;
             let sess = req.session ?? null;
-            console.log(new Date(fecha).toISOString());
             let result = await reservas.create({
                 idUsuario:sess.idUser,idVehiculo:vehiculo,idEvento:evento,fecha:new Date(fecha).toISOString()
             });
@@ -82,8 +80,11 @@ let alquileresController = {
         try {
             let {id} = req.params;
             let sess = req.session;
-            const {mis_datos,metodo,email,address,cardOwner,cardNumber,month,year,cvv} = req.body;
+            const {mis_datos,metodo,email,address,province,dni,cardOwner,cardNumber,month,year,cvv} = req.body;
             let reservaActual = await reservas.findOne({where:{id},include:[{model:usuarios,as:"usuario"},{model:opcion_alquileres,as:"opcion"},{model:eventos,as:"evento"},{model:vehiculos,as:"vehiculo"}]});
+            let precio_vehiculo = reservaActual.vehiculo.dataValues.precio_vuelta;
+            let cantidad_vueltas = reservaActual.opcion.dataValues.cantidadVueltas;
+
             if(mis_datos){
                 let usuarioActual = await usuarios.findOne({where:{id:sess.idUser},include:[{model:datos_pagos,as:"datos_pago"}]});
                 
@@ -92,18 +93,14 @@ let alquileresController = {
                     res.redirect("/servicios/alquiler4/"+id+"?status=ningun_datos_pago")
                     return false;
                 }
-                let precio_vehiculo = reservaActual.vehiculo.dataValues.precio_vuelta;
-                console.log(usuarioActual.idDatosPago)
 
-                let cantidad_vueltas = reservaActual.opcion.dataValues.cantidadVueltas;
 
                 let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo:"mis datos de pago",idReserva:id,idDatosPago:usuarioActual.idDatosPago,total:(precio_vehiculo*cantidad_vueltas)});
                 res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
     
             }
             else{
-                let nuevo_datos_pago = await datos_pagos.create({direccion:address,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,estado:province,vencimiento:month+"/"+year});
-                console.log(nuevo_datos_pago);
+                let nuevo_datos_pago = await datos_pagos.create({direccion:address,dni,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,estado:province,vencimiento:month+"/"+year});
                 let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo,idReserva:id,total:(precio_vehiculo*cantidad_vueltas),idDatosPago:nuevo_datos_pago.id});
                 res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
             }
