@@ -14,10 +14,24 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table eztrack.datos_pagos
+DROP TABLE IF EXISTS `datos_pagos`;
+CREATE TABLE IF NOT EXISTS `datos_pagos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `direccion` varchar(50) DEFAULT NULL,
+  `estado` varchar(50) DEFAULT NULL,
+  `dni` int(11) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `titular` varchar(30) DEFAULT NULL,
+  `banco` varchar(50) DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `deletedAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping database structure for eztrack
-CREATE DATABASE IF NOT EXISTS `eztrack` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `eztrack`;
+-- Dumping data for table eztrack.datos_pagos: ~0 rows (approximately)
+DELETE FROM `datos_pagos`;
 
 -- Dumping structure for table eztrack.eventos
 DROP TABLE IF EXISTS `eventos`;
@@ -34,12 +48,15 @@ CREATE TABLE IF NOT EXISTS `eventos` (
   `updatedAt` datetime DEFAULT NULL,
   `deletedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.eventos: ~2 rows (approximately)
-REPLACE INTO `eventos` (`id`, `nombre`, `ciudad`, `nombre_evento`, `nombre_autodromo`, `url_ubicacion`, `fecha_desde`, `fecha_hasta`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+-- Dumping data for table eztrack.eventos: ~3 rows (approximately)
+DELETE FROM `eventos`;
+INSERT INTO `eventos` (`id`, `nombre`, `ciudad`, `nombre_evento`, `nombre_autodromo`, `url_ubicacion`, `fecha_desde`, `fecha_hasta`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
 	(1, 'redbull', 'palermo', 'epic winter', 'C1', 'www.url.com', '2023-09-03', '2023-09-06', NULL, NULL, NULL),
-	(2, 'cocacola 2023', 'Berazategui', 'Aniversario berazategui 15 años', 'BeraSpeed', '', '2023-09-08', '2023-09-15', '2023-09-14 03:56:49', '2023-09-14 03:56:49', NULL);
+	(2, 'cocacola 2023', 'Berazategui', 'Aniversario berazategui 15 años', 'BeraSpeed', 'www.cocacola.com/2023', '2023-09-08', '2023-09-15', '2023-09-14 03:56:49', '2023-09-14 03:56:49', NULL),
+	(3, 'cocacola 2023', 'Berazategui', 'Aniversario berazategui 15 años', 'BeraSpeed', 'www.cocacola.com/2023', '2023-09-08', '2023-09-15', '2023-09-14 03:56:49', '2023-09-14 03:56:49', '2023-10-09 20:29:09'),
+	(4, 'cocacola 2023', 'Berazategui', 'Aniversario berazategui 15 años', 'BeraSpeed', 'www.cocacola.com/2023', '2023-09-08', '2023-09-15', '2023-09-14 03:56:49', '2023-09-14 03:56:49', NULL);
 
 -- Dumping structure for table eztrack.eventos_vehiculos
 DROP TABLE IF EXISTS `eventos_vehiculos`;
@@ -55,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `eventos_vehiculos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table eztrack.eventos_vehiculos: ~0 rows (approximately)
+DELETE FROM `eventos_vehiculos`;
 
 -- Dumping structure for table eztrack.metodo_pago
 DROP TABLE IF EXISTS `metodo_pago`;
@@ -65,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `metodo_pago` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table eztrack.metodo_pago: ~0 rows (approximately)
+DELETE FROM `metodo_pago`;
 
 -- Dumping structure for table eztrack.opcion_alquileres
 DROP TABLE IF EXISTS `opcion_alquileres`;
@@ -77,19 +96,10 @@ CREATE TABLE IF NOT EXISTS `opcion_alquileres` (
   `seguroPremium` int(11) NOT NULL,
   `compuestoNeumaticos` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.opcion_alquileres: ~9 rows (approximately)
-REPLACE INTO `opcion_alquileres` (`id`, `cantidadVueltas`, `naftaIncluida`, `instructorABordo`, `analisisTelemetria`, `seguroPremium`, `compuestoNeumaticos`) VALUES
-	(1, 4, 0, 0, 0, 0, 'blando'),
-	(2, 3, 1, 0, 0, 0, 'blando'),
-	(3, 2, 1, 0, 0, 0, 'blando'),
-	(4, 2, 1, 0, 0, 0, 'blando'),
-	(5, 3, 1, 1, 1, 0, 'blando'),
-	(6, 5, 1, 1, 1, 0, 'blando'),
-	(7, 3, 1, 1, 0, 0, 'blando'),
-	(8, 3, 1, 1, 1, 0, 'blando'),
-	(9, 3, 1, 1, 0, 0, 'blando');
+-- Dumping data for table eztrack.opcion_alquileres: ~0 rows (approximately)
+DELETE FROM `opcion_alquileres`;
 
 -- Dumping structure for table eztrack.pagos
 DROP TABLE IF EXISTS `pagos`;
@@ -106,6 +116,27 @@ CREATE TABLE IF NOT EXISTS `pagos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table eztrack.pagos: ~0 rows (approximately)
+DELETE FROM `pagos`;
+
+-- Dumping structure for table eztrack.pagos_pendientes
+DROP TABLE IF EXISTS `pagos_pendientes`;
+CREATE TABLE IF NOT EXISTS `pagos_pendientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `total` int(11) DEFAULT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  `metodo` varchar(50) DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `deletedAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `status` text DEFAULT 'pendiente',
+  `idReserva` int(11) DEFAULT NULL,
+  `archivo` varchar(50) DEFAULT NULL,
+  `idDatosPago` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table eztrack.pagos_pendientes: ~0 rows (approximately)
+DELETE FROM `pagos_pendientes`;
 
 -- Dumping structure for table eztrack.reservas
 DROP TABLE IF EXISTS `reservas`;
@@ -117,10 +148,11 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `idOpcionAlquiler` int(11) DEFAULT NULL,
   `subtotal` int(11) DEFAULT NULL,
   `idPago` int(11) DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   `deletedAt` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_reservas_usuarios` (`idUsuario`),
   KEY `FK_reservas_vehiculos` (`idVehiculo`),
@@ -130,23 +162,10 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   CONSTRAINT `FK_reservas_opcion_alquiler` FOREIGN KEY (`idOpcionAlquiler`) REFERENCES `opcion_alquileres` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_reservas_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_reservas_vehiculos` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.reservas: ~13 rows (approximately)
-REPLACE INTO `reservas` (`id`, `idUsuario`, `idVehiculo`, `idEvento`, `idOpcionAlquiler`, `subtotal`, `idPago`, `fecha`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-	(11, NULL, 1, 1, 2, NULL, NULL, '0000-00-00 00:00:00', '2023-09-04 04:45:44', '2023-09-04 04:45:51', NULL),
-	(12, NULL, 1, 1, 5, NULL, NULL, '0000-00-00 00:00:00', '2023-09-04 04:46:41', '2023-09-04 04:47:55', NULL),
-	(13, 1, 3, 1, 6, NULL, NULL, '0000-00-00 00:00:00', '2023-09-05 00:48:16', '2023-09-05 00:48:34', NULL),
-	(14, NULL, 1, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:20:43', '2023-09-11 02:20:43', NULL),
-	(15, NULL, 1, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:22:36', '2023-09-11 02:22:36', NULL),
-	(16, NULL, 1, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:24:10', '2023-09-11 02:24:10', NULL),
-	(17, NULL, 1, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:25:13', '2023-09-11 02:25:13', NULL),
-	(18, NULL, 1, 1, 8, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:31:14', '2023-09-11 02:33:08', NULL),
-	(19, NULL, 1, 1, 9, NULL, NULL, '0000-00-00 00:00:00', '2023-09-11 02:34:06', '2023-09-11 02:34:11', NULL),
-	(20, NULL, 7, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-15 02:49:49', '2023-09-15 02:49:49', NULL),
-	(21, NULL, 39, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-19 20:57:11', '2023-09-19 20:57:11', NULL),
-	(22, NULL, 39, 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-19 20:57:54', '2023-09-19 20:57:54', NULL),
-	(23, 1, 3, 2, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-09-19 21:05:52', '2023-09-19 21:05:52', NULL);
+-- Dumping data for table eztrack.reservas: ~0 rows (approximately)
+DELETE FROM `reservas`;
 
 -- Dumping structure for table eztrack.roles
 DROP TABLE IF EXISTS `roles`;
@@ -154,13 +173,15 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rol` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.roles: ~3 rows (approximately)
-REPLACE INTO `roles` (`id`, `rol`) VALUES
+-- Dumping data for table eztrack.roles: ~4 rows (approximately)
+DELETE FROM `roles`;
+INSERT INTO `roles` (`id`, `rol`) VALUES
 	(1, 'usuario'),
 	(2, 'administrador'),
-	(3, 'asistente');
+	(3, 'asistente'),
+	(4, 'atencion al cliente');
 
 -- Dumping structure for table eztrack.usuarios
 DROP TABLE IF EXISTS `usuarios`;
@@ -175,15 +196,18 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `deletedAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   `idRol` int(11) DEFAULT NULL,
+  `idDatosPago` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.usuarios: ~4 rows (approximately)
-REPLACE INTO `usuarios` (`id`, `nombre`, `email`, `telefono`, `identidadVerificada`, `password`, `createdAt`, `deletedAt`, `updatedAt`, `idRol`) VALUES
-	(1, 'conrado', 'conrado@gmail.com', 2147483647, NULL, '123asd', NULL, NULL, NULL, 2),
-	(2, 'prueba algo', 'prueba@gmail.com', 12345, NULL, '123asd', NULL, NULL, NULL, 1),
-	(3, 'lopez', 'lopez@gmail.com', 123456, NULL, '123asd', NULL, NULL, NULL, 1),
-	(4, 'fabricio gonzales', 'fabricio@gmail.com', 123456, NULL, '123asd', NULL, NULL, NULL, 3);
+-- Dumping data for table eztrack.usuarios: ~5 rows (approximately)
+DELETE FROM `usuarios`;
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `telefono`, `identidadVerificada`, `password`, `createdAt`, `deletedAt`, `updatedAt`, `idRol`, `idDatosPago`) VALUES
+	(1, 'conrado', 'conrado@gmail.com', 2147483647, NULL, '123asd', NULL, NULL, NULL, 2, 3),
+	(2, 'prueba algo', 'prueba@gmail.com', 12345, NULL, '123asd', NULL, NULL, NULL, 1, NULL),
+	(3, 'lopez', 'lopez@gmail.com', 123456, NULL, '123asd', NULL, NULL, NULL, 1, NULL),
+	(4, 'fabricio gonzales', 'fabricio@gmail.com', 123456, NULL, '123asd', NULL, NULL, NULL, 3, NULL),
+	(5, 'daniel lopez', 'daniel@gmail.com', 12345126, NULL, '123asd', NULL, NULL, NULL, 4, NULL);
 
 -- Dumping structure for table eztrack.vehiculos
 DROP TABLE IF EXISTS `vehiculos`;
@@ -204,18 +228,20 @@ CREATE TABLE IF NOT EXISTS `vehiculos` (
   `precio_vuelta` int(11) DEFAULT NULL,
   `nivel` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.vehiculos: ~8 rows (approximately)
-REPLACE INTO `vehiculos` (`id`, `modelo`, `marca`, `año`, `peso`, `potencia`, `disponibilidad`, `createdAt`, `deletedAt`, `updatedAt`, `img`, `descripcion`, `traccion`, `precio_vuelta`, `nivel`) VALUES
-	(1, 'P3', 'Tesla', 2022, 1500, 200, 0, '2023-09-03 23:52:45', NULL, '2023-09-03 23:52:45', NULL, NULL, 200, 15, NULL),
-	(2, 'J10', 'Renault', 2023, 1600, 1000, 0, '2023-09-03 23:57:39', NULL, '2023-09-03 23:57:39', NULL, NULL, 150, 12, NULL),
-	(3, 'P5', 'Tesla', 2023, 1500, 2000, 0, '2023-09-05 00:41:38', NULL, '2023-09-05 00:41:38', NULL, 'MANITOU SPRINGS, Colorado – Racing uphill on roads with little to no guardrails at speeds exceeding 100 miles per hour may not sound like everyone\'s cup of tea, but for the competitors of the annual P', 100, 15, NULL),
+-- Dumping data for table eztrack.vehiculos: ~9 rows (approximately)
+DELETE FROM `vehiculos`;
+INSERT INTO `vehiculos` (`id`, `modelo`, `marca`, `año`, `peso`, `potencia`, `disponibilidad`, `createdAt`, `deletedAt`, `updatedAt`, `img`, `descripcion`, `traccion`, `precio_vuelta`, `nivel`) VALUES
+	(1, 'w1', 'ford', 2913, 8, 8, 0, '2023-09-03 23:52:45', NULL, '2023-09-26 20:34:19', '1695758695013--1695690943489--martinedit-640x427.j', '', 11, 10, 9),
+	(4, 'q1', 'ford', 2023, 3, 12, 0, NULL, NULL, '2023-09-26 19:57:41', NULL, 'Poco peso, frenos grandes, tracción trasera, normativas de seguridad acorde a la FIA. Es un auto para pilotos intermedios o avanzados que no tiene desperdicio.', 6, 5, 4),
 	(7, 'J1', 'Renault', 2022, 2100, 200, 0, '2023-09-13 02:47:55', NULL, '2023-09-13 02:47:55', NULL, 'En diciembre de 2015, Renault anunció la adquisición del equipo Lotus y su regreso a la Fórmula 1 en calidad de constructor. Renault adquirió la empresa por el precio simbólico de una libra. Hizo fren', 430, 16, NULL),
-	(12, 'K19', 'tesla', 2023, 3000, 1000, 0, '2023-09-19 18:17:12', NULL, '2023-09-19 18:17:12', NULL, 'qwe ', 0, 8, NULL),
+	(12, 'K19', 'tesla', 2023, 3000, 1000, 0, '2023-09-19 18:17:12', NULL, '2023-09-26 20:04:55', NULL, '', 0, 8, 5),
 	(39, 'k192', 'tesla', 2022, 4030, 1301, 0, '2023-09-19 19:10:15', NULL, '2023-09-19 19:10:15', '1695150615348--img2.png', 'asd asd asd ', 1000, 8, NULL),
 	(40, 'p16', 'Tesla', 2016, 1600, 200, 0, '2023-09-22 04:59:22', NULL, '2023-09-22 04:59:22', '1695358762026--img1.png', 'lorem lorem lorem', 200, 16, 16),
-	(46, 'w1', 'q1', 2022, 2, 1, 0, '2023-09-25 03:29:28', NULL, '2023-09-25 03:29:28', '1695612568782--martinedit-640x427.jpg', 'qwe qwe ', 5, 4, 3);
+	(46, 'w1', 'q1', 2022, 2, 1, 0, '2023-09-25 03:29:28', NULL, '2023-09-25 03:29:28', '1695612568782--martinedit-640x427.jpg', 'qwe qwe ', 5, 4, 3),
+	(47, 'a1', 'tesla', 2020, 1, 12, 0, '2023-09-26 01:15:43', NULL, '2023-09-26 01:15:43', '1695690943489--martinedit-640x427.jpg', '1', 5, 2, 3),
+	(48, 'w1', 'e1', 2022, 1600, 1300, 0, '2023-09-26 01:54:24', NULL, '2023-09-26 01:54:24', '1695693264283--ken-block-s-cars_285-40577276_20230', '', 2000, 12, 8);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
