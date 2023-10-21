@@ -32,6 +32,9 @@ table.table-list .thumbnail {
   background-color: rgba(237, 237, 237, 0.55);
   border-radius: 3px;
 }
+#alquiler2 #calendar-wrapper .special-buttons {
+  display: none;
+}
 
 #alquiler4 #datos_bancarios {
   display: none;
